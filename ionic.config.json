@@ -1,0 +1,7 @@
+{
+  "name": "moneyview",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
