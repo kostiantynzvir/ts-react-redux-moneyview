@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" color="warning"  >
+        {{ editMode ? "Bearbeiten" : "Neuer Eintrag" }}
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <form #myForm="ngForm" (ngSubmit)="editMode ? editEntry() : addEntries()">
+    
+      <ion-toolbar translucent >
+        <ion-segment name="type" [(ngModel)]="entry.type">
+          <ion-segment-button value="income">
+            <ion-label color="primary">Einnahmen</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="spending">
+            <ion-label color="danger">Ausgaben</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+  
+    <ion-item>
+      <ion-label>Datum</ion-label>
+      <ion-datetime #dateField="ngModel" display-format="D MMMM YYYY" picker-format="D MMMM YYYY" [(ngModel)]="entry.newDate" name="date" required ></ion-datetime>
+      <ion-item *ngIf="dateField.invalid && dateField.touched " id="smallFont">
+        Datum nicht vergessen 👮🏽
+      </ion-item>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>Betrag</ion-label>
+      <ion-input [color]="entry.type == 'income' ? 'primary' : 'danger'" #amountField="ngModel" name="amount" [(ngModel)]="entry.amount" type="number" required></ion-input>
+      <ion-item *ngIf="amountField.invalid && amountField.touched " id="smallFont">
+        Betrag nicht vergessen 👮🏽
+      </ion-item>
+    </ion-item>
+    <ion-item>
+      <ion-label>Notiz</ion-label>
+      <ion-input name="note" [(ngModel)]="entry.note" placeholder="Beschreibung" type="text"></ion-input>
+    </ion-item>
+
+      <ion-list>
+        <ion-item >
+          <ion-label>Kategorie</ion-label>
+          <ion-select name="category" [(ngModel)]="entry.category" cancelText="Abbrechen" okText="Okay!" #categoryField="ngModel" required>
+            <ion-select-option value="lebensmittel">Lebensmittel</ion-select-option>
+            <ion-select-option value="verkehrsmittel">Verkehrsmittel</ion-select-option>
+            <ion-select-option value="sozialleben" >Sozialleben</ion-select-option>
+            <ion-select-option value="hobbys">Hobbys</ion-select-option>
+            <ion-select-option value="miete">Miete</ion-select-option>
+            <ion-select-option value="vertraege">Verträge</ion-select-option>
+            <ion-select-option value="geschenke">Geschenke</ion-select-option>
+            <ion-select-option value="kleidung">Kleidung</ion-select-option>
+            <ion-select-option value="sonsigtes">sonstiges</ion-select-option>
+            <ion-select-option value="Gehalt">Gehalt</ion-select-option>
+          </ion-select>
+          <ion-item *ngIf="categoryField.invalid && categoryField.touched " id="smallFont">
+            Kategorie nicht vergessen 👮🏽
+          </ion-item>
+        </ion-item>
+      </ion-list>
+
+
+    <ion-button type="submit" expand="block" color="warning" [disabled]="myForm.invalid" >
+      {{ editMode ? "Speichern" : "Hinzufügen" }}
+    </ion-button>
+  </form>
+  
+
+</ion-content>

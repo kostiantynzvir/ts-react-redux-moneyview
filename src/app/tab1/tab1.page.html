@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
+    <ion-title > 
+      Money View
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,78 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large" color="warning" >Money View</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div>
+    <ion-icon name="chevron-back-outline" (click)="previous()"></ion-icon>
+    {{ allMonth[month] }}
+    {{ year }}
+    <ion-icon name="chevron-forward-outline" (click)="next()"></ion-icon>
+  </div>
+
+  <ion-card>
+    <ion-grid>
+      <ion-row> 
+        <ion-col>
+          Eingaben
+        </ion-col>
+        <ion-col>
+           Ausgaben
+       </ion-col>
+       <ion-col>
+          Saldo
+        </ion-col>
+     </ion-row>
+
+      <ion-row>
+       <ion-col style="color:#acc9ae">
+         {{ storage.totalIncome | currency:'EUR'}}
+       </ion-col>
+        <ion-col style="color:#ff4961"> 
+         {{ storage.totalSpending | currency:'EUR' }}
+       </ion-col>
+       <ion-col >
+         <ion-text [color]="(storage.totalIncome - storage.totalSpending) > 0 ? 'primary' : 'danger'">
+          {{ (storage.totalIncome - storage.totalSpending) | currency:'EUR' }}
+          </ion-text>
+         </ion-col>
+     </ion-row>
+    </ion-grid>
+  </ion-card>
+
+ <ion-card>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of storage.entries; let i=index" (click)="openEdit(i)">
+      <ion-item-options side="end"  (ionSwipe)="deleteEntry(i)">
+        <ion-item-option color="danger" (click)="deleteEntry(i)" expandable>Delete</ion-item-option>
+      </ion-item-options>
+      <ion-item>
+        <ion-grid id="list"> 
+          <ion-row> 
+            <ion-col>
+              {{ item.note }} <br>
+              <span id=smallFont> {{ item.category }} </span>
+            </ion-col>
+            <ion-col>
+              {{ item.newDate | date:'d/M/yy'}} 
+            </ion-col>
+            <ion-col>
+              <span *ngIf="item.type == 'spending'">-</span>
+              {{ item.amount | currency:'EUR' }} 
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+       </ion-item>
+    </ion-item-sliding>
+   </ion-list>
+  </ion-card> 
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="addEntries" color="warning">  
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>

@@ -1,0 +1,33 @@
+ion-fab {
+    margin-right: 25px;
+    margin-bottom: 25px;
+}
+
+ion-col {
+    text-align: center;
+  }
+
+
+ion-grid {
+    background-color:#262626;
+    border-radius: 8px;
+    box-shadow: 6px 6px 10px hsla(300,15%,25%,0.3) inset;
+}
+
+ion-item-sliding ion-item {
+    margin-top: 14px;
+}
+
+
+#smallFont {
+    font-size: 14px;
+    color: lightgray;
+    text-align: start;
+}
+
+div ion-icon {
+    margin-left: 14px;
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+}

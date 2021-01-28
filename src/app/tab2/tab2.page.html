@@ -1,17 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large" color="warning">Statistik</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div>
+    <ion-icon name="chevron-back-outline" (click)="previous()"></ion-icon>
+    {{ allMonth[storage.month] }}
+    {{ storage.year }}
+    <ion-icon name="chevron-forward-outline" (click)="next()"></ion-icon>
+  </div>
+
+  <ion-list>
+    <ion-card >
+      <ion-card-header>
+        <ion-card-subtitle>Einnahmen und Ausgaben</ion-card-subtitle>
+        <ion-card-title>Monatsübersicht</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #barChart></canvas>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngFor="let item of storage.getDataByCategory() | keyvalue">
+      <ion-grid>
+        <ion-row>
+          <ion-col style="color:lightyellow"> 
+            {{ item.key }} 
+          </ion-col>
+          <ion-col style="color:lightyellow">
+            {{ item.value | currency:'EUR' }}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-card>
+
+  </ion-list>
 </ion-content>
