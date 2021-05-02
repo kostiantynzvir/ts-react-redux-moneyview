@@ -1,6 +1,6 @@
 # tab1 - Home: 
 Die App soll den Studierenden leicht erkenntlich machen wie viel man im Monat noch zur Verfügung hat. 
-Deswegen bestet die erste Seite aus dem Monatsnamen in dem wir uns zur Zeit befinden, Eine Übersicht von Einnahmen, Ausgaben und dem Saldo und alle Einträge des Monats.
+Deswegen besteht die erste Seite aus dem Monatsnamen in dem wir uns zur Zeit befinden, Eine Übersicht von Einnahmen, Ausgaben und dem Saldo und alle Einträge des Monats.
 Das Monat kann leicht durch den danebenliegenden icons geändert werden.
 Die Das geschiet durch die Leiste mit der Übersich von Eingaben, Ausgaben und Saldo. 
 Der Saldo hat hier eine andere Farbe, damit schnell ersichtlich wird ob man im Plus oder Minus ist. 
